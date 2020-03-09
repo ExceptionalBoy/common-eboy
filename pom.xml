@@ -184,16 +184,15 @@
     <!--&lt;!&ndash; 配置远程发布到私服：mvn deploy &ndash;&gt;-->
     <distributionManagement>
         <snapshotRepository>
-            <id>eboy-mexus</id>
-            <name>Team Nexus Repository</name>
-            <url>http://39.100.32.147:8081/repository/maven-snapshots/</url>
+            <id>eboy-nexus</id>
+            <name>Nexus Release Repository</name>
+            <url>http://39.100.32.147:8081/repository/eboy-release/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>
-            <id>eboy-mexus</id>
-            <name>Team Nexus Repository</name>
-            <url>http://39.100.32.147:8081/repository/maven-releases/</url>
+            <id>eboy-nexus</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://39.100.32.147:8081/repository/eboy-snapshot/</url>
         </repository>
     </distributionManagement>
-
 </project>

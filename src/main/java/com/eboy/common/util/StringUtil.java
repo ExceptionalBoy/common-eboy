@@ -122,6 +122,43 @@ public class StringUtil {
 		else 
 			return true;
 	}
+
+	/**
+	 *
+	 * @Title: isEmpty
+	 * @Description:检测字符串是否有空格 TODO
+	 * @param @param string
+	 * @param @return
+	 * @return boolean
+	 * @throws
+	 */
+	public static boolean isBlank(String str) {
+		int strLen;
+		if (str != null && (strLen = str.length()) != 0) {
+			for(int i = 0; i < strLen; ++i) {
+				if (!Character.isWhitespace(str.charAt(i))) {
+					return false;
+				}
+			}
+
+			return true;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *
+	 * @Title: isEmpty
+	 * @Description:检测字符串是否有空格 TODO
+	 * @param @param string
+	 * @param @return
+	 * @return boolean
+	 * @throws
+	 */
+	public static boolean isNotBlank(String str) {
+		return !isBlank(str);
+	}
 	/**
 	 * 
 	 * @Title: isEmpty
@@ -976,5 +1013,70 @@ public class StringUtil {
 		}else{
 			return source;
 		}
+	}
+
+
+	/**
+	 *
+	 * @Title: kmpMatch
+	 * @Description: kmp算法查找字符串 TODO
+	 * @param @param source
+	 * @param @param target
+	 * @param @return
+	 * @return Integer
+	 * @throws
+	 */
+	public static Integer kmpMatch(String source,String target){
+		if(source == null || target == null || "".equals(source) || "".equals(target))
+			return -1;
+		char[] sourceArray = source.toCharArray();
+		char[] targetArray = target.toCharArray();
+		int[] next = getNext(target);
+		int i = 0;
+		int j = 0;
+		while(i < sourceArray.length && j < targetArray.length){
+			if(j == -1 || sourceArray[i] == targetArray[j]){
+				i++;
+				j++;
+			}else{
+				//i = i - j + 1;
+				//j = 0;
+				j = next[j];
+			}
+		}
+		if(j == targetArray.length){
+			return i - j;
+		}else{
+			return -1;
+		}
+	}
+
+	/**
+	 *
+	 * @Title: getNext
+	 * @Description: 查找next数据 TODO
+	 * @param @param target
+	 * @param @return
+	 * @return int[]
+	 * @throws
+	 */
+	public static int[] getNext(String target) {
+		char[] p = target.toCharArray();
+		int[] next = new int[p.length];
+		next[0] = -1;
+		int j = 0;
+		int k = -1;
+		while (j < p.length - 1) {
+			if (k == -1 || p[j] == p[k]) {
+				if (p[++j] == p[++k]) { // 当两个字符相等时要跳过
+					next[j] = next[k];
+				} else {
+					next[j] = k;
+				}
+			} else {
+				k = next[k];
+			}
+		}
+		return next;
 	}
 }
